@@ -17,7 +17,6 @@ const Home = ()=>{
     
     return (
         <div className="Home">
-            <Header />
             <Search />
             {
                 videos.mylist && videos.mylist.length > 0 &&  <Categories title={'Mi Lista'}>
@@ -54,7 +53,6 @@ const Home = ()=>{
                     </Carousel>
                 </Categories>
             }
-            <Footer />
         </div>
     )
 }
