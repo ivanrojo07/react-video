@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+
+import { setRegisterRequest } from "../actions";
 
 import '../assets/styles/Register.scss'
 
-const Register = () =>{
+const Register = (props) =>{
+    const [form, setValues] = useState({
+        email:'',
+        name:'',
+        password:'',
+    })
+    const handleInput = event =>{
+        setValues({
+            ...form,
+            [event.target.name]:event.target.value
+        })
+    }
+    const handleSubmit = (event)=>{
+        event.preventDefault()
+        props.setRegisterRequest(form)
+        props.history.push('/')
+    }
     return (
         <section className="register">
             <section className="register__container">
             <h2>Regístrate</h2>
-            <form className="register__container--form">
-                <input className="input" type="text" placeholder="Nombre" />
-                <input className="input" type="text" placeholder="Correo" />
-                <input className="input" type="password" placeholder="Contraseña" />
+            <form className="register__container--form" onSubmit={handleSubmit}>
+                <input className="input" type="text" placeholder="Nombre" name="name"  onChange={handleInput} />
+                <input className="input" type="text" placeholder="Correo" name="email" onChange={handleInput} />
+                <input className="input" type="password" placeholder="Contraseña" name="password" onChange={handleInput} />
                 <button className="button">Registrarme</button>
             </form>
-            <a href="">Iniciar sesión</a>
+            <Link to="/login">Iniciar sesión</Link>
             </section>
         </section>
     )
 }
-
-export default Register
+const mapDispatchToProps = {
+    setRegisterRequest, 
+}
+export default connect(null, mapDispatchToProps)(Register)
