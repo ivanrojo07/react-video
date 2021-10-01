@@ -32,3 +32,10 @@ export const setRegisterRequest = payload =>{
         payload
     }
 }
+
+export const getVideoSource = payload =>{
+    return {
+        type:'GET_VIDEO_SOURCE',
+        payload
+    }
+}

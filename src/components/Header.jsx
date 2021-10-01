@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import '../assets/styles/components/Header.scss'
 import logo from '../assets/static/logo-platzi-video-BW2.png'
 import user_icon from '../assets/static/user-icon.png'
@@ -10,15 +11,20 @@ import { connect } from 'react-redux';
 import { setLogoutRequest } from '../actions';
 
 const Header = (props)=>{
-    const {user} = props;
+    const {user,isLogin,isRegister} = props;
     const hasUser = Object.keys(user).length > 0;
 
     const handleLogout = ()=>{
         props.setLogoutRequest()
     }
 
+    const headerClass = classNames('header',{
+        isLogin,
+        isRegister
+    })
+
     return (
-        <header className="header">
+        <header className={headerClass}>
             <Link to="/" >
                 <img className="header__img" src={logo} alt="Platzi Video" />
             </Link>
